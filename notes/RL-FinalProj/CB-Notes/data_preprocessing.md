@@ -1,8 +1,8 @@
 # Data Processing Workflow for Job Data Analysis
-
+[Back to Index](../index.md)
 ## 1. Overview of the Data Pipeline
 
-Our project involves several critical steps to process job posting data for reinforcement learning applications:
+Our project involves several steps to process job posting data for reinforcement learning applications:
 
 1. **Data Collection**: Gathering datasets from Kaggle sources
 2. **Data Preprocessing**: Cleaning and standardizing the data

@@ -1,5 +1,5 @@
 ###   Data Preprocessing and Feature Transformation (WIP)
-
+[Back to Index](../index.md)
 **Objective:** To create robust and informative feature representations of job descriptions, focusing on hard skills, soft skills, and job requirements, and to prepare these representations for use in a recommendation system, potentially leveraging a contextual bandit approach.
 
 **1.  Input Data**

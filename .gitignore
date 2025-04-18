@@ -1,13 +1,12 @@
-
 data_tools/__pycache__/__init__.cpython-313.pyc
 data_tools/__pycache__/dataset_preprocessing.cpython-313.pyc
 /mongo_db
-utils/__pycache__/llm_data_mining.cpython-313.pyc
-utils/__pycache__/model_manager.cpython-313.pyc
-utils/__pycache__/mongo_import.cpython-313.pyc
-utils/__pycache__/mongo_setup.cpython-313.pyc
-utils/__pycache__/mongo_utils.cpython-313.pyc
-utils/__pycache__/__init__.cpython-313.pyc
+preprocessing_utils/__pycache__/llm_data_mining.cpython-313.pyc
+preprocessing_utils/__pycache__/model_manager.cpython-313.pyc
+preprocessing_utils/__pycache__/mongo_import.cpython-313.pyc
+preprocessing_utils/__pycache__/mongo_setup.cpython-313.pyc
+preprocessing_utils/__pycache__/mongo_utils.cpython-313.pyc
+preprocessing_utils/__pycache__/__init__.cpython-313.pyc
 kaggle_datasets/gsearch_jobs.csv
 kaggle_datasets/postings.csv
 kaggle_datasets/DataAnalyst.csv
@@ -16,3 +15,6 @@ notes/RL-FinalProj/.obsidian/appearance.json
 notes/RL-FinalProj/.obsidian/core-plugins.json
 notes/RL-FinalProj/.obsidian/graph.json
 notes/RL-FinalProj/.obsidian/workspace.json
+data_preprocessing/preprocessing_utils/api_keys.json
+data_preprocessing/kaggle_datasets/gsearch_jobs.csv
+data_preprocessing/kaggle_datasets/postings.csv

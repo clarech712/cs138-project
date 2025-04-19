@@ -18,7 +18,7 @@ This project focuses on analyzing job postings data using reinforcement learning
 ├── mongo_db/                  # MongoDB database files and backups
 ├── project/                   # Main project files
 │   └── data_preprocessing.ipynb # Jupyter notebook for data preprocessing
-├── utils/                     # Utility functions and tools
+├── preprocessing_utils/                     # Utility functions and tools
 │   ├── __init__.py
 │   ├── api_keys.json         # API keys configuration
 │   ├── llm_data_mining.py    # LLM-based data mining utilities
@@ -128,4 +128,6 @@ When adding new datasets or making changes:
 ## Notes
 - All datasets are preprocessed to remove duplicates and standardize text
 - The MongoDB database is backed up regularly to the `mongo_db/` directory
-- API keys should be stored in `utils/api_keys.json` (not tracked in git)
+- API keys should be stored in `preprocessing_utils/api_keys.json` (not tracked in git)
+
+**Note**: If you're running the Jupyter notebooks in `project/`, you may need to update import statements to reference `data_preprocessing.preprocessing_utils` instead of `utils`.

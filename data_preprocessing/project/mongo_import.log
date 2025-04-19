@@ -1922,3 +1922,23 @@ try 'C:\Program Files\MongoDB\Server\8.0\bin\mongod.exe --help' for more informa
 2025-04-07 12:39:54,754 - utils.mongo_utils - INFO - Successfully backed up database 'rl_jobsdb' to C:\Users\cbrad\OneDrive\Documentos\Tufts\Spring 2025\COMP138_ReinforcementLearning\Final-Proj\cs138-project\mongo_db
 2025-04-07 12:39:54,755 - utils.mongo_utils - INFO - Backup output: 
 2025-04-07 12:39:54,756 - __main__ - INFO - Backup completed successfully
+2025-04-19 14:59:46,745 - tensorflow - WARNING - From C:\Users\lashe\AppData\Roaming\Python\Python312\site-packages\tf_keras\src\losses.py:2976: The name tf.losses.sparse_softmax_cross_entropy is deprecated. Please use tf.compat.v1.losses.sparse_softmax_cross_entropy instead.
+
+2025-04-19 15:02:04,492 - sentence_transformers.SentenceTransformer - INFO - Use pytorch device_name: cuda
+2025-04-19 15:02:04,493 - sentence_transformers.SentenceTransformer - INFO - Load pretrained SentenceTransformer: ../misc_data/all-MiniLM-L6-v2-finetuned/
+2025-04-19 15:02:04,494 - sentence_transformers.SentenceTransformer - WARNING - You try to use a model that was created with version 4.1.0, however, your version is 3.2.0. This might cause unexpected behavior or errors. In that case, try to update to the latest version.
+
+
+
+2025-04-19 15:02:05,079 - preprocessing_utils.sentence2vec_utils - INFO - Successfully loaded model from ../misc_data/all-MiniLM-L6-v2-finetuned/
+2025-04-19 15:22:56,017 - tensorflow - WARNING - From C:\Users\lashe\AppData\Roaming\Python\Python312\site-packages\tf_keras\src\losses.py:2976: The name tf.losses.sparse_softmax_cross_entropy is deprecated. Please use tf.compat.v1.losses.sparse_softmax_cross_entropy instead.
+
+2025-04-19 15:22:56,546 - sentence_transformers.SentenceTransformer - INFO - Use pytorch device_name: cuda
+2025-04-19 15:22:56,547 - sentence_transformers.SentenceTransformer - INFO - Load pretrained SentenceTransformer: ../misc_data/all-MiniLM-L6-v2-finetuned/
+2025-04-19 15:22:56,547 - sentence_transformers.SentenceTransformer - WARNING - You try to use a model that was created with version 4.1.0, however, your version is 3.2.0. This might cause unexpected behavior or errors. In that case, try to update to the latest version.
+
+
+
+2025-04-19 15:22:56,945 - preprocessing_utils.sentence2vec_utils - INFO - Successfully loaded model from ../misc_data/all-MiniLM-L6-v2-finetuned/
+2025-04-19 15:23:02,075 - preprocessing_utils.mongo_utils - INFO - Initialized JobIterator with batch size 10
+2025-04-19 15:23:02,649 - preprocessing_utils.mongo_utils - INFO - MongoDB connection closed

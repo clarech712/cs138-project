@@ -317,3 +317,105 @@ class JobIterator:
         self.client.close()
         logger.info("MongoDB connection closed")
 
+
+def move_jobs_with_skills(batch_size=100, 
+                         source_mongo_uri="mongodb://localhost:27017/", 
+                         target_mongo_uri=None,  # Will default to source if not provided
+                         db_name="rl_jobsdb", 
+                         source_collection_name="all_jobs",
+                         target_collection_name="skilled_jobs",
+                         use_ssl=False):
+    """
+    Move jobs with non-empty technical_skills from source to target collection.
+    
+    Uses the JobIterator to efficiently process jobs in batches.
+    
+    Args:
+        batch_size (int): Number of jobs to process in each batch
+        source_mongo_uri (str): MongoDB connection URI for source database
+        target_mongo_uri (str, optional): MongoDB connection URI for target database
+                                         If None, will use source_mongo_uri
+        db_name (str): Name of the database
+        source_collection_name (str): Name of the source collection
+        target_collection_name (str): Name of the target collection
+        use_ssl (bool): Whether to use SSL for remote connections
+    
+    Returns:
+        int: Number of jobs moved to the target collection
+    """
+    # Use source URI for target if not provided
+    if target_mongo_uri is None:
+        target_mongo_uri = source_mongo_uri
+        logger.info("Using same MongoDB connection for source and target")
+    else:
+        logger.info("Using separate MongoDB connections for source and target")
+    
+    # Set up MongoDB connection for the target collection
+    try:
+        if use_ssl:
+            import certifi
+            target_client = pymongo.MongoClient(
+                target_mongo_uri,
+                tls=True,
+                tlsCAFile=certifi.where()
+            )
+        else:
+            target_client = pymongo.MongoClient(target_mongo_uri)
+            
+        target_db = target_client[db_name]
+        target_collection = target_db[target_collection_name]
+        
+        logger.info(f"Connected to target MongoDB: {target_mongo_uri}, database: {db_name}, collection: {target_collection_name}")
+    except Exception as e:
+        logger.error(f"Error connecting to target MongoDB: {str(e)}")
+        raise
+    
+    # Query for jobs with non-empty technical_skills array
+    query = {"technical_skills": {"$exists": True, "$ne": []}}
+    
+    # Initialize the JobIterator with our query
+    iterator = JobIterator(
+        mongo_uri=source_mongo_uri,
+        db_name=db_name, 
+        collection_name=source_collection_name,
+        batch_size=batch_size,
+        query=query
+    )
+    
+    logger.info(f"Connected to source MongoDB: {source_mongo_uri}, database: {db_name}, collection: {source_collection_name}")
+    logger.info(f"Query: {query}")
+    
+    # Process jobs in batches
+    moved_count = 0
+    
+    try:
+        # Process all batches
+        for batch_num, batch in enumerate(iterator, 1):
+            batch_moved = 0
+            
+            # Process jobs in this batch with a progress bar
+            for job in tqdm(batch, desc=f"Batch {batch_num}"):
+                # Check if the job already exists in the target collection
+                if not target_collection.find_one({"_id": job["_id"]}):
+                    try:
+                        # Insert the job into the target collection
+                        result = target_collection.insert_one(job)
+                        if result.acknowledged:
+                            batch_moved += 1
+                        else:
+                            logger.warning(f"Failed to insert job {job['_id']}")
+                    except Exception as e:
+                        logger.error(f"Error moving job {job.get('_id')}: {str(e)}")
+            
+            moved_count += batch_moved
+            logger.info(f"Batch {batch_num}: Moved {batch_moved}/{len(batch)} jobs. Total moved: {moved_count}")
+        
+        logger.info(f"Processing complete. Total jobs moved: {moved_count}")
+        return moved_count
+    
+    finally:
+        # Close connections
+        iterator.close()
+        target_client.close()
+        logger.info("MongoDB connections closed")
+

@@ -1,9 +1,8 @@
-import fasttext
 import numpy as np
 import os
 from sentence_transformers import SentenceTransformer, InputExample, losses, models
 from sentence_transformers.losses import MultipleNegativesRankingLoss, ContrastiveLoss
-from torch.utils.data import DataLoader
+from torch.utils.data import DataLoader, Dataset
 import torch
 import random
 import logging
@@ -32,6 +31,7 @@ class FastTextModule:
             model_path (str): Path to save trained model
         """
         try:
+            import fasttext
             # Train FastText model
             logger.info(f"Training FastText model with {model} approach, dim={dim}, epochs={epoch}")
             model = fasttext.train_unsupervised(train_data_path, 
@@ -56,7 +56,7 @@ class FastTextModule:
         try:
             if not os.path.exists(self.model_path):
                 raise FileNotFoundError(f"Model file not found: {self.model_path}")
-                
+            import fasttext
             self.fasttext = fasttext.load_model(self.model_path)
             logger.info(f"FastText model loaded from {self.model_path}")
         except Exception as e:
